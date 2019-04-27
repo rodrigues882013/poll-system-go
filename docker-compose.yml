@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  nginx:
+    network_mode: host
+    hostname: nginx
+    build: ./nginx
+    image: nginx:develop
+    ports:
+      - "80:80"
+
+  mongo:
+    hostname: mongo
+    image: mongo:3.4
+    volumes:
+      - /data/db/mongo
+    ports:
+      - "27017:27017"
+
+  redis:
+    hostname: redis
+    image: redis:alpine
+    volumes:
+      - /data/db/redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: rabbitmq:3-management
+    volumes:
+      - /data/queue/rabbitmq
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "15672:15672"
+
+  captcha:
+    hostname: captcha
+    build: ./captcha
+    image: captcha:develop
+    ports:
+      - "5000:5000"

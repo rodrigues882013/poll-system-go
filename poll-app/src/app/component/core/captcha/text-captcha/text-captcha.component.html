@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label for="txtAnswer">{{chosen?.q}}</label>
+  <input type="text"
+         [(ngModel)]="answer"
+         class="form-control"
+         id="txtAnswer"
+         aria-describedby="question"
+         placeholder="Answer the question to vote.">
+</div>
+
+<button type="button" class="btn btn-primary" (click)="checkAnswer()">Verify</button>
+

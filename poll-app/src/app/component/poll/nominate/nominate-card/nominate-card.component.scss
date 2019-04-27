@@ -1,0 +1,11 @@
+.nominate-img{
+  width: 100%;
+  height: 250px;
+}
+
+.card:active, .card:hover, .card:focus, .selected {
+  border-style: solid;
+  border-color: #ff7f2c;
+  border-width: 2px;
+  cursor: pointer;
+}

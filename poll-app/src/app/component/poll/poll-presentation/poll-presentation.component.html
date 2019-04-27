@@ -1,0 +1,18 @@
+<div class="host-button">
+  <h3>QUEM DEVE SER <strong>ELIMINADO?</strong></h3>
+  <hr/>
+
+  <span *ngIf="hiddenElement" [innerHTML]="success"></span>
+
+  <div *ngIf="!hiddenElement" class="card-deck card-center text-center">
+    <app-nominate-card *ngFor="let nominate of poll.nominates; let i = index"
+                       [nominate]="nominate"
+                       [cardChosen]="chosen[i]"
+                       (select)="changeSelection($event)">
+    </app-nominate-card>
+  </div>
+  <hr/>
+
+  <button *ngIf="!hiddenElement" class="btn btn-primary btn-lg" (click)="open()">Envie seu voto</button>
+  <app-result-chart *ngIf="hiddenElement" [data]="data?.result" [title]="'Test'"></app-result-chart>
+</div>

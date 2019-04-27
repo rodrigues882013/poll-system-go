@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h4 class="modal-title">Por favor confirme seu voto.</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group" *ngIf="canBeVote"
+         [ngClass]="{'has-error': (nameVar.touched || nameVar.dirty) && !nameVar.valid }">
+      <label for="txtName">Nome</label>
+      <input type="text"
+             [(ngModel)]="vote.name"
+             name="name"
+             #nameVar="ngModel"
+             class="form-control"
+             id="txtName"
+             aria-describedby="name"
+             placeholder="Digit your name" required="">
+
+      <span class="error-color" *ngIf="(nameVar.touched || nameVar.dirty) && nameVar.errors">
+        <span *ngIf="nameVar.errors.required">
+            Digite seu nome.
+        </span>
+        <span *ngIf="nameVar.errors.pattern">
+            Digite seu nome.
+        </span>
+      </span>
+    </div>
+    <div class="form-group" *ngIf="canBeVote"
+         [ngClass]="{'has-error': (emailVar.touched || emailVar.dirty) && !emailVar.valid }">
+      <label for="txtEmail">Email</label>
+      <input type="email"
+             [(ngModel)]="vote.email"
+             #emailVar="ngModel"
+             name="email"
+             class="form-control"
+             id="txtEmail"
+             aria-describedby="email"
+             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+"
+             placeholder="Digit your email" required>
+      <span class="error-color" *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.errors">
+        <span *ngIf="emailVar.errors.required">
+            Digite seu email.
+        </span>
+        <span *ngIf="emailVar.errors.pattern">
+            Digite seu email.
+        </span>
+      </span>
+    </div>
+    <app-text-captcha (canBeVote)="checkAnswer($event)" *ngIf="!canBeVote"></app-text-captcha>
+  </form>
+  <button type="button"
+          class="btn btn-primary"
+          *ngIf="canBeVote"
+          [disabled]="(!vote.name || !vote.email || isWrongEmail())"
+          (click)="submitVote()">
+    Votar
+  </button>
+</div>

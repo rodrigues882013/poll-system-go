@@ -1,0 +1,8 @@
+<div class="card mb-4 shadow-sm"
+     [ngClass]="cardChosen ? 'selected' : ''"
+     (click)="changeSelection()" style="width: 18rem;">
+  <img [src]="nominate?.picture" class="nominate-img img-thumbnail img-fluid" alt="...">
+  <div class="card-body">
+    <p class="card-text">Para eliminar o participante x pelo telefone disque 0800-123-00X ou mande um SMS para 800X.</p>
+  </div>
+</div>
